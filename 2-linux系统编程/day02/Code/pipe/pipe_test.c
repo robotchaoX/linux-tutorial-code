@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 int main(void) {
-    int fd[2]; // 人为规定 [0]读端 [1]写端
+    int fd[2]; // [0]读端 [1]写端
     pid_t pid;
     int i;
 

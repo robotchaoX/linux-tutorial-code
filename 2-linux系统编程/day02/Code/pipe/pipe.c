@@ -12,7 +12,7 @@ void sys_err(const char *str) {
 int main(void) {
     pid_t pid;
     char buf[1024];
-    int fd[2]; // 人为规定 [0]读端 [1]写端
+    int fd[2]; // [0]读端 [1]写端
     char *p = "test for pipe\n";
 
     // 创建管道pipe
