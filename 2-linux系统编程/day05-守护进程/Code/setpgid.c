@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// getppid() 获取当前进程的进程组ID
-// setpgid() 改变进程默认所属的进程组
+// getppid 获取当前进程的进程组ID
+// setpgid 改变进程默认所属的进程组
+//修改子进程的进程组ID
 int main(void) {
     pid_t pid;
 

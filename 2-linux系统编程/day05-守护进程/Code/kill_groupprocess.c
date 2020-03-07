@@ -9,6 +9,7 @@ void sys_err(const char *str) {
     exit(-1);
 }
 
+// 终端使用 kill -SIGKILL -进程组ID(负的) 将整个进程组内的进程全部杀死
 int main(int argc, char *argv[]) {
     pid_t pid;
     int i;
@@ -34,7 +35,6 @@ int main(int argc, char *argv[]) {
             sleep(1);
         }
     }
-
     if (pid > 0) { /* in parent */
         pid_t cpid;
         while ((cpid = wait(NULL)) > 0)

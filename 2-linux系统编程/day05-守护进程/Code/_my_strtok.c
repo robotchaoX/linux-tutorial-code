@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// 切分字符串
 char *mystrtok(char *str, const char *delim) {
     char *s_begin, *s_end;
     static char *savep = "";
@@ -28,7 +29,7 @@ int main(void) {
     char str[] = "root:0::/ root/ bash:/usr/bin";
     char *token = NULL;
 
-    token = mystrtok(str, ":");
+    token = mystrtok(str, ":"); // 按:切分字符串
     printf("token:%s\n", token);
 
     while ((token = mystrtok(NULL, ":")))

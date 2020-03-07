@@ -11,7 +11,6 @@ int main(void) {
     if ((pid = fork()) < 0) {
         perror("fork");
         exit(1);
-
     } else if (pid == 0) { // 子进程
 
         printf("child process PID is %d\n", getpid());
@@ -31,6 +30,9 @@ int main(void) {
         sleep(10);
 
         printf("-----child byebye-----\n");
+        // exit(0);
+    } else { // 父进程
+        // 父进程结束
         exit(0);
     }
     printf("------all byebye-----\n");
