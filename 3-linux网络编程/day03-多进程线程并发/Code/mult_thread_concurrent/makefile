@@ -4,13 +4,16 @@ obj = $(patsubst %.c, %.o, $(src))
 all: server client
 
 server: server.o wrap.o
-	gcc server.o wrap.o -o server -Wall
+	gcc server.o wrap.o -o server -Wall -lpthread
 client: client.o wrap.o
-	gcc client.o wrap.o -o client -Wall
+	gcc client.o wrap.o -o client -Wall -lpthread
 
 %.o:%.c
-	gcc -c $< -Wall
+	gcc -c $< -Wall 
 
 .PHONY: clean all
 clean: 
 	-rm -rf server client $(obj)
+
+
+

@@ -34,10 +34,9 @@ int Bind(int fd, const struct sockaddr *sa, socklen_t salen) {
 
 int Connect(int fd, const struct sockaddr *sa, socklen_t salen) {
     int n;
-    n = connect(fd, sa, salen);
-    if (n < 0) {
+
+    if ((n = connect(fd, sa, salen)) < 0)
         perr_exit("connect error");
-    }
 
     return n;
 }
@@ -70,7 +69,6 @@ again:
         else
             return -1;
     }
-
     return n;
 }
 
@@ -95,14 +93,14 @@ int Close(int fd) {
     return n;
 }
 
-/*参三: 应该读取的字节数*/ // socket 4096  readn(cfd, buf, 4096)   nleft = 4096-1500
+/*参三: 应该读取的字节数*/
 ssize_t Readn(int fd, void *vptr, size_t n) {
     size_t nleft; // usigned int 剩余未读取的字节数
     ssize_t nread; // int 实际读到的字节数
     char *ptr;
 
     ptr = vptr;
-    nleft = n; // n 未读取字节数
+    nleft = n;
 
     while (nleft > 0) {
         if ((nread = read(fd, ptr, nleft)) < 0) {
@@ -113,7 +111,7 @@ ssize_t Readn(int fd, void *vptr, size_t n) {
         } else if (nread == 0)
             break;
 
-        nleft -= nread; // nleft = nleft - nread
+        nleft -= nread;
         ptr += nread;
     }
     return n - nleft;
@@ -133,6 +131,7 @@ ssize_t Writen(int fd, const void *vptr, size_t n) {
             else
                 return -1;
         }
+
         nleft -= nwritten;
         ptr += nwritten;
     }
@@ -146,13 +145,12 @@ static ssize_t my_read(int fd, char *ptr) {
 
     if (read_cnt <= 0) {
     again:
-        if ((read_cnt = read(fd, read_buf, sizeof(read_buf))) < 0) { //"hello\n"
+        if ((read_cnt = read(fd, read_buf, sizeof(read_buf))) < 0) {
             if (errno == EINTR)
                 goto again;
             return -1;
         } else if (read_cnt == 0)
             return 0;
-
         read_ptr = read_buf;
     }
     read_cnt--;
@@ -161,15 +159,13 @@ static ssize_t my_read(int fd, char *ptr) {
     return 1;
 }
 
-/*readline --- fgets*/
-//传出参数 vptr
 ssize_t Readline(int fd, void *vptr, size_t maxlen) {
     ssize_t n, rc;
     char c, *ptr;
-    ptr = vptr;
 
+    ptr = vptr;
     for (n = 1; n < maxlen; n++) {
-        if ((rc = my_read(fd, &c)) == 1) { // ptr[] = hello\n
+        if ((rc = my_read(fd, &c)) == 1) {
             *ptr++ = c;
             if (c == '\n')
                 break;
