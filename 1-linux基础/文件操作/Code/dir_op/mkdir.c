@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 
     int mode = strtol(argv[2], NULL, 8); // strtol字符串转长整型，8进制
     // 创建文件夹，指定权限
-    int ret = mkdir(argv[1], mode);
+    int ret = mkdir(argv[1], mode); // 8进制
     if (ret == -1) {
         perror("mkdir");
         exit(1);

@@ -38,10 +38,13 @@ int main() {
     printf("current fd fd_new = %d\n", fd_new);
     printf("current fd fd_old = %d\n", fd_old);
 
-    char *buf = "主要看气质 ^_^！！！！！！！！！！\n";
+    char *buf = "aaaa！！！\n";
+    char *buf2 = "bbbb！！！\n";
+    char *buf3 = "cccc！！！\n";
     // fd_new fd_old 都指向同一文件fd_old
-    write(fd_new, buf, strlen(buf));
-    write(fd_old, "hello, world!", 13);
+    write(fd_new, buf, strlen(buf)); // 三个文件描述符指向同一文件
+    write(fd_new, buf2, strlen(buf2));
+    write(fd_new, buf3, strlen(buf3));
 
     close(fd_new);
     close(fd_old);

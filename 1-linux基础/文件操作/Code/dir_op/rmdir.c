@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    // 删除目录,只能删除空目录??
     int ret = rmdir(argv[1]);
     if (ret == -1) {
         perror("rmdir");

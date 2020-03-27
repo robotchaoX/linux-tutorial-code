@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    // rename 重命名
+    // rename 文件重命名
     int ret = rename(argv[1], argv[2]);
     if (ret == -1) {
         perror("rename");

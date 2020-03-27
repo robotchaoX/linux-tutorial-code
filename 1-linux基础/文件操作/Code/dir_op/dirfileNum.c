@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// 递归读目录下文件个数
 int getFileNum(char *root) {
     // 打开目录
     DIR *dir = opendir(root);

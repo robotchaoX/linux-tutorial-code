@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    // 获取文件属性
     struct stat st;
     int ret = stat(argv[1], &st); // 将文件argv[1]的状态写入st
     if (ret == -1) {
